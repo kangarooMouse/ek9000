@@ -136,14 +136,16 @@ bool util::setupCommonDpvt(const char* recName, const char* inp, TerminalDpvt_t&
 
 	/* Resolve terminal */
 	dpvt.pterm = dpvt.pdrv->TerminalByIndex(dpvt.pos);
-	dpvt.pterm->SetRecordName(recName);
-	dpvt.pterm->Init(dpvt.terminalType, dpvt.pos);
+
 	if (dpvt.pterm == NULL) {
 		epicsPrintf("%s (when parsing %s): unable to find terminal\n", function, recName);
 		dpvt = TerminalDpvt_t();
 		return false;
 	}
-
+	
+	dpvt.pterm->SetRecordName(recName);
+	dpvt.pterm->Init(dpvt.terminalType, dpvt.pos);
+	
 	return true;
 }
 
